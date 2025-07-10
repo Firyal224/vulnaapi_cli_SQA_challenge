@@ -1,0 +1,6 @@
+2025-07-09 18:06:58,962 - INFO - SHA-256 hash of file: 896f24cda23558857bbcc1e41000be4d11a0007b3abbb334a116c16822243051
+2025-07-09 18:06:58,964 - INFO - Loaded SARIF file: findings.json
+2025-07-09 18:06:58,990 - INFO - Validation passed.
+2025-07-10 06:46:51,000 - INFO - SHA-256 hash of file: 896f24cda23558857bbcc1e41000be4d11a0007b3abbb334a116c16822243051
+2025-07-10 06:46:51,002 - INFO - Loaded SARIF file: findings.json
+2025-07-10 06:46:51,035 - INFO - Validation passed.

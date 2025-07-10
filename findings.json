@@ -1,0 +1,565 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "opengrep",
+          "organization": "Unknown",
+          "version": "1.0.0",
+          "rules": [
+            {
+              "id": "php.lang.security.injection.echoed-request.echoed-request",
+              "name": "Cross-site Scripting",
+              "shortDescription": {
+                "text": "Cross-site Scripting"
+              },
+              "fullDescription": {
+                "text": "The code displays user-supplied input directly without any escape or encoding, allowing an attacker to inject malicious HTML or JavaScript. This XSS vulnerability can be mitigated by properly escaping output using htmlentities()."
+              },
+              "help": {
+                "text": "The code displays user-supplied input directly without any escape or encoding, allowing an attacker to inject malicious HTML or JavaScript. This XSS vulnerability can be mitigated by properly escaping output using htmlentities().\n\nImpact:\nNo detailed impact information available.\n\nMitigation:\n## Version update steps:\nModify the echo statement that outputs the 'mensaje' parameter so that it wraps the variable in htmlentities() with ENT_QUOTES and 'UTF-8'. This ensures that any HTML or script characters are converted to safe entities.\n\n## adaptations required:\nReplace the vulnerable echo line (e.g., echo \"<div>$mensaje</div>\") with a version that calls htmlentities() on $mensaje. For example, change it to echo \"<div>\" . htmlentities($mensaje, ENT_QUOTES, 'UTF-8') . \"</div>\".\n\n## Test and validate:\nTest the change by passing input containing HTML tags and JavaScript code via the 'mensaje' parameter and verifying that the output displays escaped characters, preventing any script execution in the browser.",
+                "markdown": "# Cross-site Scripting\n## Description\nThe code displays user-supplied input directly without any escape or encoding, allowing an attacker to inject malicious HTML or JavaScript. This XSS vulnerability can be mitigated by properly escaping output using htmlentities().\n## Impact\nNo detailed impact information available.\n## Mitigation\n## Version update steps:\nModify the echo statement that outputs the 'mensaje' parameter so that it wraps the variable in htmlentities() with ENT_QUOTES and 'UTF-8'. This ensures that any HTML or script characters are converted to safe entities.\n\n## adaptations required:\nReplace the vulnerable echo line (e.g., echo \"<div>$mensaje</div>\") with a version that calls htmlentities() on $mensaje. For example, change it to echo \"<div>\" . htmlentities($mensaje, ENT_QUOTES, 'UTF-8') . \"</div>\".\n\n## Test and validate:\nTest the change by passing input containing HTML tags and JavaScript code via the 'mensaje' parameter and verifying that the output displays escaped characters, preventing any script execution in the browser.\n## References\n* https://www.php.net/manual/en/function.htmlentities.php\n* https://www.php.net/manual/en/reserved.variables.request.php\n* https://www.php.net/manual/en/reserved.variables.post.php\n* https://www.php.net/manual/en/reserved.variables.get.php\n* https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html\n"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "tags": [
+                  "XSS",
+                  "Input Sanitization",
+                  "PHP"
+                ],
+                "precision": "very-high",
+                "security-severity": "5.4",
+                "impact": 50,
+                "likelihood": "Medium",
+                "exploitability": 50,
+                "fixing_effort": 30,
+                "priority": 54,
+                "policy_rules": [],
+                "remediation_type": "pull_request",
+                "additional_references": [
+                  "https://www.php.net/manual/en/reserved.variables.request.php",
+                  "https://www.php.net/manual/en/reserved.variables.post.php",
+                  "https://www.php.net/manual/en/reserved.variables.get.php",
+                  "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+                ]
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CWE-79",
+                    "toolComponent": {
+                      "name": "CWE",
+                      "guid": "TODO: Add CWE catalog GUID"
+                    }
+                  },
+                  "kinds": [
+                    "relevant"
+                  ]
+                },
+                {
+                  "target": {
+                    "id": {
+                      "owasp_id": "A03",
+                      "title": "Injection"
+                    },
+                    "toolComponent": {
+                      "name": "OWASP",
+                      "guid": "TODO: Add OWASP catalog GUID"
+                    }
+                  },
+                  "kinds": [
+                    "relevant"
+                  ]
+                }
+              ],
+              "helpUri": "https://www.php.net/manual/en/function.htmlentities.php"
+            }
+          ],
+          "properties": {
+            "language": "php",
+            "category": "Application",
+            "platform": null,
+            "service": null
+          }
+        }
+      },
+      "results": [
+        {
+          "ruleId": "php.lang.security.injection.echoed-request.echoed-request",
+          "level": "warning",
+          "message": {
+            "text": "The code displays user-supplied input directly without any escape or encoding, allowing an attacker to inject malicious HTML or JavaScript. This XSS vulnerability can be mitigated by properly escaping output using htmlentities()."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.php",
+                  "uriBaseId": "%68590233ab9be70f850504b6%"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 13,
+                  "endColumn": 78
+                },
+                "contextRegion": {
+                  "text": "            echo \"id: \" . $row[\"id\"]. \" - Nombre: \" . $row[\"nombre\"]. \"<br>\";"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2217644504209356670"
+          },
+          "properties": {
+            "precision": "very-high",
+            "security-severity": "5.4",
+            "status": "enriched",
+            "issue_owner": "tmalbos",
+            "developer_ids": [],
+            "is_false_positive": false,
+            "false_positive_type": null,
+            "is_mitigated_externally": false,
+            "is_duplicate": false,
+            "duplicate_finding_id": null,
+            "scan_id": "685902bcab9be70f850504ca",
+            "data_source": "plexalyzer",
+            "record_source": null,
+            "nb_occurrences": null,
+            "review_requested_by": null,
+            "epss": 0,
+            "cvssv3": {
+              "score": 6.1,
+              "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+            }
+          },
+          "fixes": [
+            {
+              "description": {
+                "text": "Suggested fix based on mitigation guidance"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "index.php"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "startLine": 25,
+                        "startColumn": 13,
+                        "endColumn": 78
+                      },
+                      "insertedContent": {
+                        "text": "## Version update steps:\nModify the echo statement that outputs the 'mensaje' parameter so that it wraps the variable in htmlentities() with ENT_QUOTES and 'UTF-8'. This ensures that any HTML or script characters are converted to safe entities.\n\n## adaptations required:\nReplace the vulnerable echo line (e.g., echo \"<div>$mensaje</div>\") with a version that calls htmlentities() on $mensaje. For example, change it to echo \"<div>\" . htmlentities($mensaje, ENT_QUOTES, 'UTF-8') . \"</div>\".\n\n## Test and validate:\nTest the change by passing input containing HTML tags and JavaScript code via the 'mensaje' parameter and verifying that the output displays escaped characters, preventing any script execution in the browser."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "json.npm.security.package-dependencies-check.package-dependencies-check",
+          "level": "warning",
+          "message": {
+            "text": "The package.json file specifies the 'express' and 'lodash' dependencies using caret version specifiers (e.g., \"^4.17.1\"), which may result in installing newer, potentially vulnerable versions. This could allow an attacker to hijack the dependency if malicious code is published in an update. Locking the dependency to an exact version or relying on an updated package-lock.json can mitigate this risk."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json",
+                  "uriBaseId": "%68590233ab9be70f850504b6%"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 5,
+                  "endColumn": 25
+                },
+                "contextRegion": {
+                  "text": "    \"express\": \"^4.17.1\","
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2550447893367958875"
+          },
+          "properties": {
+            "precision": "high",
+            "security-severity": "5.6",
+            "status": "enriched",
+            "issue_owner": "Jose",
+            "developer_ids": [],
+            "is_false_positive": false,
+            "false_positive_type": null,
+            "is_mitigated_externally": false,
+            "is_duplicate": false,
+            "duplicate_finding_id": null,
+            "scan_id": "685902bcab9be70f850504ca",
+            "data_source": "plexalyzer",
+            "record_source": null,
+            "nb_occurrences": null,
+            "review_requested_by": null,
+            "epss": 0,
+            "cvssv3": {
+              "score": 6.5,
+              "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N"
+            }
+          },
+          "fixes": [
+            {
+              "description": {
+                "text": "Suggested fix based on mitigation guidance"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "package.json"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "startLine": 14,
+                        "startColumn": 5,
+                        "endColumn": 25
+                      },
+                      "insertedContent": {
+                        "text": "## Version update steps:\nEdit the package.json file to remove the caret (^) from the version numbers for 'express' and 'lodash'. Then regenerate the package-lock.json by reinstalling the dependencies. Finally, verify that the installed packages match the exact versions specified.\n\n"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "php.lang.security.injection.tainted-sql-string.tainted-sql-string",
+          "level": "error",
+          "message": {
+            "text": "The code concatenates unsanitized user input directly into a SQL query, resulting in a SQL injection vulnerability that could allow an attacker to retrieve or manipulate database data. Additionally, an XSS vulnerability is indicated where unsanitized data may be output. The fix requires using prepared statements to bind parameters and ensuring any user-supplied output is properly sanitized."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.php",
+                  "uriBaseId": "%68590233ab9be70f850504b6%"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 12,
+                  "endColumn": 51
+                },
+                "contextRegion": {
+                  "text": "    $sql = \"SELECT * FROM usuarios WHERE id = $id\"; // Vulnerable a SQL Injection"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "-2929861435462347070"
+          },
+          "properties": {
+            "precision": "very-high",
+            "security-severity": "8.7",
+            "status": "enriched",
+            "issue_owner": "tmalbos",
+            "developer_ids": [],
+            "is_false_positive": false,
+            "false_positive_type": null,
+            "is_mitigated_externally": false,
+            "is_duplicate": false,
+            "duplicate_finding_id": null,
+            "scan_id": "685902bcab9be70f850504ca",
+            "data_source": "plexalyzer",
+            "record_source": null,
+            "nb_occurrences": null,
+            "review_requested_by": null,
+            "epss": 0,
+            "cvssv3": {
+              "score": 9.8,
+              "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+            }
+          },
+          "fixes": [
+            {
+              "description": {
+                "text": "Suggested fix based on mitigation guidance"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "index.php"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "startLine": 20,
+                        "startColumn": 12,
+                        "endColumn": 51
+                      },
+                      "insertedContent": {
+                        "text": "## Version update steps:\nReplace the manually constructed SQL query with a prepared statement that uses bound parameters. Review all points where user input is inserted into SQL queries to ensure parameterization is consistently applied. Additionally, check areas where user input is output to the browser and apply proper sanitization or encoding to mitigate potential XSS vulnerabilities. Test the changes thoroughly in a staging environment before deploying to production.\n\n"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "php.lang.security.injection.echoed-request.echoed-request",
+          "level": "warning",
+          "message": {
+            "text": "User input from the 'mensaje' GET parameter is echoed without sanitization, risking cross-site scripting. Use htmlentities() with ENT_QUOTES and UTF-8 encoding when outputting this data."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.php",
+                  "uriBaseId": "%68590233ab9be70f850504b6%"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 5,
+                  "endColumn": 32
+                },
+                "contextRegion": {
+                  "text": "    echo \"<div>$mensaje</div>\"; // Vulnerable a XSS"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "-4203588159384176112"
+          },
+          "properties": {
+            "precision": "very-high",
+            "security-severity": "5.4",
+            "status": "enriched",
+            "issue_owner": "tmalbos",
+            "developer_ids": [],
+            "is_false_positive": false,
+            "false_positive_type": null,
+            "is_mitigated_externally": false,
+            "is_duplicate": false,
+            "duplicate_finding_id": null,
+            "scan_id": "685902bcab9be70f850504ca",
+            "data_source": "plexalyzer",
+            "record_source": null,
+            "nb_occurrences": null,
+            "review_requested_by": null,
+            "epss": 0,
+            "cvssv3": {
+              "score": 6.1,
+              "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+            }
+          },
+          "fixes": [
+            {
+              "description": {
+                "text": "Suggested fix based on mitigation guidance"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "index.php"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "startLine": 36,
+                        "startColumn": 5,
+                        "endColumn": 32
+                      },
+                      "insertedContent": {
+                        "text": "## Version update steps:\nModify line 36 in index.php so that the echoed user input is passed through htmlentities() with the ENT_QUOTES flag and UTF-8 encoding. This will neutralize any embedded scripts before they reach the browser.\n\n## adaptations required:\nChange the vulnerable echo statement from echo \"<div>$mensaje</div>\" to echo \"<div>\" . htmlentities($mensaje, ENT_QUOTES, 'UTF-8') . \"</div>\".\n\n## Test and validate:\nDevelop tests that inject typical XSS payloads via the 'mensaje' parameter to ensure that the output is properly encoded and that no script execution occurs."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "py/reflective-xss",
+          "level": "warning",
+          "message": {
+            "text": "The vulnerability exists in the FastAPI endpoint where user input is directly interpolated into HTML without sanitization. This reflected XSS flaw allows an attacker to inject malicious scripts via the URL, potentially compromising client-side data."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.py",
+                  "uriBaseId": "%68590233ab9be70f850504b6%"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 12,
+                  "endColumn": 78
+                },
+                "contextRegion": {
+                  "text": "    return f\"<html><body><h1>Your input was: {user_input}</h1></body></html>\""
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "1370025928284897671"
+          },
+          "properties": {
+            "precision": "very-high",
+            "security-severity": "5.4",
+            "status": "enriched",
+            "issue_owner": "tmalbos",
+            "developer_ids": [],
+            "is_false_positive": false,
+            "false_positive_type": null,
+            "is_mitigated_externally": false,
+            "is_duplicate": false,
+            "duplicate_finding_id": null,
+            "scan_id": "6859023900efdae880b74d8d",
+            "data_source": "github",
+            "record_source": null,
+            "nb_occurrences": null,
+            "review_requested_by": null,
+            "epss": 0,
+            "cvssv3": {
+              "score": 6.1,
+              "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+            }
+          },
+          "fixes": [
+            {
+              "description": {
+                "text": "Suggested fix based on mitigation guidance"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "main.py"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "startLine": 12,
+                        "startColumn": 12,
+                        "endColumn": 78
+                      },
+                      "insertedContent": {
+                        "text": "## Version update steps:\nReview the endpoint implementation and apply proper HTML escaping or use a templating system that auto-escapes output. Ensure that any user-supplied data is explicitly sanitized before being embedded in HTML responses. Validate the fix by testing that injected scripts are rendered harmlessly as text.\n\n"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "json.npm.security.package-dependencies-check.package-dependencies-check",
+          "level": "warning",
+          "message": {
+            "text": "The package.json file specifies dependency versions using non‐pinned version ranges (e.g., '^4.17.21' for lodash), which may allow an attacker to inject malicious updates through dependency hijack. Pinning dependencies to an exact version or using a lockfile (package-lock.json) is recommended."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json",
+                  "uriBaseId": "%68590233ab9be70f850504b6%"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 5,
+                  "endColumn": 25
+                },
+                "contextRegion": {
+                  "text": "    \"lodash\": \"^4.17.21\""
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "-6036269650550376819"
+          },
+          "properties": {
+            "precision": "high",
+            "security-severity": "5.0",
+            "status": "enriched",
+            "issue_owner": "Jose",
+            "developer_ids": [],
+            "is_false_positive": false,
+            "false_positive_type": null,
+            "is_mitigated_externally": false,
+            "is_duplicate": false,
+            "duplicate_finding_id": null,
+            "scan_id": "685902bcab9be70f850504ca",
+            "data_source": "plexalyzer",
+            "record_source": null,
+            "nb_occurrences": null,
+            "review_requested_by": null,
+            "epss": 0,
+            "cvssv3": {
+              "score": 6.5,
+              "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:M/I:L/A:N"
+            }
+          },
+          "fixes": [
+            {
+              "description": {
+                "text": "Suggested fix based on mitigation guidance"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "package.json"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "startLine": 15,
+                        "startColumn": 5,
+                        "endColumn": 25
+                      },
+                      "insertedContent": {
+                        "text": "## Version update steps:\nReview the package.json file and update any dependency version specifications that use range operators (such as '^') to use an exact version number. After updating, regenerate or update your package-lock.json file to ensure that the dependency tree is locked to the specified versions.\n\n"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "columnKind": "utf16CodeUnits",
+      "originalUriBaseIds": {
+        "68590233ab9be70f850504b6": {
+          "uri": "project://68590233ab9be70f850504b6/"
+        }
+      },
+      "properties": {
+        "metrics": {
+          "total": 6,
+          "critical": 0,
+          "high": 1,
+          "medium": 5,
+          "low": 0
+        }
+      }
+    }
+  ]
+}
